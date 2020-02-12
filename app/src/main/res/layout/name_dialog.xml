@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/b3"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:layout_width="298dp"
+        android:layout_height="151dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="236dp"
+        android:background="@drawable/dark"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TituloEdad"
+            style="@android:style/Widget.DeviceDefault.Light.TextView"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="111dp"
+            android:layout_marginRight="150dp"
+            android:text="Enter Your Name"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/nombreUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="20"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorWhite"
+            android:textColorLink="#00F7F4F4" />
+
+        <Button
+            android:id="@+id/AceptarBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="buttonAccept"
+            android:text="Accept" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
