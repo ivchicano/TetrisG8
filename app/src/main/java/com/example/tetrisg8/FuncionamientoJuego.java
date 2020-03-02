@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.preference.PreferenceManager;
 
-import java.util.Random;
+import java.security.SecureRandom;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.text.DateFormat;
@@ -171,7 +171,7 @@ public class FuncionamientoJuego {
     }
 
     public int generarTipoPiezaRandom() {
-        return new Random().nextInt(6) + 1;
+        return new SecureRandom().nextInt(6) + 1;
     }
 
     public Pieza generarPieza(int desplazamientoColumnas) {
