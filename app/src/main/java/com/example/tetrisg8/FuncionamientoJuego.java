@@ -170,14 +170,16 @@ public class FuncionamientoJuego {
         controlarMusica.stopMediaPlayer();
     }
 
+    public int generarTipoPiezaRandom() {
+        return new Random().nextInt(6) + 1;
+    }
+
     public Pieza generarPieza(int desplazamientoColumnas) {
-        int tipoPieza = (int) Math.floor(new Random().nextInt(6) + 1);
-        return new Pieza(tipoPieza, tablero.getFilaInicial(), desplazamientoColumnas);
+        return new Pieza(generarTipoPiezaRandom(), tablero.getFilaInicial(), desplazamientoColumnas);
     }
 
     public Pieza generarPiezaSiguiente() {
-        int tipoPieza = (int) Math.floor(new Random().nextInt(6) + 1);
-        return new Pieza(tipoPieza);
+        return new Pieza(generarTipoPiezaRandom());
     }
 
     public void controlarBotonRandom() {
