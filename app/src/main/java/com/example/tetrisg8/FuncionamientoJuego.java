@@ -117,28 +117,34 @@ public class FuncionamientoJuego {
     }
 
     public void controlarPiezaExtra() {
-        int numPosiciones;
         if (tablero.getPiezaExtra() == null) {
-            if (tiempoTranscurrido > 0 && tiempoTranscurrido % 30000 == 0) {
-                piezaExtra = generarPieza(3);
-                tablero.setPiezaExtra(piezaExtra);
-            }
+            generarPiezaExtra();
         } else {
-            if (tablero.posibleBajar("extra")) {
-                numPosiciones = tablero.numPosicionesBajar();
-                tablero.bajarPieza("extra", numPosiciones);
-            } else {
-                if (tablero.ocupadoPosPieza(piezaExtra)) {
-                    if (!namePlayer.isEmpty()) {
-                        db.insertData(namePlayer,String.valueOf(puntuacion),String.valueOf(df.format(tiempoTranscurrido)));
-                    }
-                    mainActivity.pantallaGameOver();
-                    controlarMusica.stopMediaPlayer();
-                } else {
-                    tablero.asignarPieza(piezaExtra);
-                    piezaExtra = null;
-                    tablero.setPiezaExtra(null);
+            moverPiezaExtra();
+        }
+    }
+
+    private void generarPiezaExtra() {
+        if (tiempoTranscurrido > 0 && tiempoTranscurrido % 30000 == 0) {
+            piezaExtra = generarPieza(3);
+            tablero.setPiezaExtra(piezaExtra);
+        }
+    }
+
+    private void moverPiezaExtra() {
+        if (tablero.posibleBajar("extra")) {
+            tablero.bajarPieza("extra", tablero.numPosicionesBajar());
+        } else {
+            if (tablero.ocupadoPosPieza(piezaExtra)) {
+                if (!namePlayer.isEmpty()) {
+                    db.insertData(namePlayer,String.valueOf(puntuacion),String.valueOf(df.format(tiempoTranscurrido)));
                 }
+                mainActivity.pantallaGameOver();
+                controlarMusica.stopMediaPlayer();
+            } else {
+                tablero.asignarPieza(piezaExtra);
+                piezaExtra = null;
+                tablero.setPiezaExtra(null);
             }
         }
     }
