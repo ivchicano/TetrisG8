@@ -278,6 +278,16 @@ public class FuncionamientoJuego {
     public void setTiempoBotonDesactivado(int tiempoBotonDesactivado) {
         this.tiempoBotonDesactivado = tiempoBotonDesactivado;
     }
+    public void setPuntuacion(int aux){
+        this.puntuacion = aux;
+    }
+    public void setMainActivity(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
+    }
+
+    public int getTiempoBotonDesactivado() {
+        return this.tiempoBotonDesactivado;
+    }
 
 
 }
