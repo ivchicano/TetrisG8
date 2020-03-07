@@ -271,6 +271,9 @@ public class FuncionamientoJuego {
     public int getPuntuacion() {
         return puntuacion;
     }
+    public void setPuntuacion(int aux){
+        this.puntuacion = aux;
+    }
     public int getTiempoTranscurrido() {
         return tiempoTranscurrido;
     }
@@ -278,8 +281,8 @@ public class FuncionamientoJuego {
     public void setTiempoBotonDesactivado(int tiempoBotonDesactivado) {
         this.tiempoBotonDesactivado = tiempoBotonDesactivado;
     }
-    public void setPuntuacion(int aux){
-        this.puntuacion = aux;
+    public MainActivity getMainActivity(){
+        return this.mainActivity;
     }
     public void setMainActivity(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
