@@ -16,11 +16,10 @@ public class FuncionamientoJuegoTest {
     private Tablero tablero = Mockito.mock(Tablero.class);
     private FuncionamientoJuego funcionamientoJuego;
     private MainActivity mainActivity = Mockito.mock(MainActivity.class);
-    private SharedPreferences pref = mock(SharedPreferences.class);
 
     @Before
     public void setUp() {
-        funcionamientoJuego = new FuncionamientoJuego(gameView, fichaView, tablero, "Juan",null);
+        funcionamientoJuego = new FuncionamientoJuego(gameView, fichaView, tablero, "Juan", null);
         funcionamientoJuego.setMainActivity(mainActivity);
 
     }
@@ -40,7 +39,7 @@ public class FuncionamientoJuegoTest {
 
         funcionamientoJuego.setTiempoBotonDesactivado(32);
         funcionamientoJuego.controlarBotonRandom();
-        assertEquals(33,funcionamientoJuego.getTiempoBotonDesactivado());
+        assertEquals(33, funcionamientoJuego.getTiempoBotonDesactivado());
 
     }
 
