@@ -91,14 +91,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         start.finalizarTimer();
-        start.stopMediaPlayer();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         start.finalizarTimer();
-        start.stopMediaPlayer();
     }
 
     public void actualizarPuntuacion(int puntuacion) {
