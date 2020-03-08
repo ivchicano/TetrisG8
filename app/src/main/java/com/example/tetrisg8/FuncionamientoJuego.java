@@ -216,12 +216,26 @@ public class FuncionamientoJuego {
         return puntuacion;
     }
 
+    public void setPuntuacion(int aux){
+        this.puntuacion = aux;
+    }
+
     public int getTiempoTranscurrido() {
         return tiempoTranscurrido;
     }
 
     public void setTiempoBotonDesactivado(int tiempoBotonDesactivado) {
         this.tiempoBotonDesactivado = tiempoBotonDesactivado;
+    }
+    public MainActivity getMainActivity(){
+        return this.mainActivity;
+    }
+    public void setMainActivity(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
+    }
+
+    public int getTiempoBotonDesactivado() {
+        return this.tiempoBotonDesactivado;
     }
 
 }

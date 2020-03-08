@@ -24,6 +24,7 @@ sonarqube {
     property "sonar.organization", "ivchicano"
     property "sonar.host.url", "https://sonarcloud.io"
     property "sonar.login", "e562535d4d07ae2c2a059075fb525a52a3cad3b3"
+	property "sonar.branch.name", System.getenv('BRANCH')
   }
 }
 
