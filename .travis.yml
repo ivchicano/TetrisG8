@@ -5,11 +5,18 @@ android:
   - build-tools-29.0.3
   - android-29
 before-script:
+# Dar permisos a gradle
 - chmod +x ./gradlew
+# Obtener rama actual en variable de entorno BRANCH
+- export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+- echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
 script:
+# Ejecutar tests siempre
 - "./gradlew build"
-- if [ "$TRAVIS_BRANCH" = "develop" ]; then ./gradlew sonarqube; fi
-- if [ "$TRAVIS_BRANCH" = "master" ]; then ./gradlew assembleRelease; git config --global
+# Si estamos en develop ejecutar sonar
+- if [ "$BRANCH" = "develop" ]; then ./gradlew sonarqube; fi
+# Si estamos en master compilamos y desplegamos a GitHub Releases (hacemos un tag y deploy se encarga de desplegar)
+- if [ "$BRANCH" = "master" ]; then ./gradlew assembleRelease; git config --global
   user.email "deploy@travis-ci.com"; git config --global user.name "Travis CI Deploy";
   export GIT_TAG=1.0.$TRAVIS_BUILD_NUMBER; git tag "$GIT_TAG" -a -m "Despliegue desde Travis con build numero $TRAVIS_BUILD_NUMBER"; 
   ls -R;
@@ -20,6 +27,5 @@ deploy:
     secure: K5qbU1o0uP0/toSDN1vQrMjNV2PTsIiqv/Jl5AXqRQq0MKKaeys5lzh3fqxti4ynFqyexWuwIsFvRg6fn7c92PVRAKieqVNFwgBcYqPtkerHf8vF63IpukNwdxhhAJ8WAQRbBUnmYPbhGJ314hQdQ6Hoc85hP/QQ0KIL4Q46aeCBU1qvpTpXWk0dQllSBm/mD2JNZBjp5izPUQVXBAVrtpBaoPb4hWkwSz8+oxCHmRDW4LGRZM25TkasW1aJuSpSSXQ5HkNAny8PlM22PT6Xs3yQyDrqPXzLYNOuYpNaGsyN5jUy6Jz2MSNk8x5V3K5r2Y/17V/72+mm3pA1DIYWf0dL7Xe+mtB6zUMumCLZUoWrfCWWFv88LwWY/nsUsKQrGnEwjCaVS4U+n8rSuSqluiPnjSlrWM0KmRuKBoI1VPRjYXLr76JVLwljiKPgVnjjSkvjpIM/7N8IpUaU+amNng7sz4GKULxfzcKOd2LiNUKc2kEDFYdNqGHGYbxGtujl9lPI1pGi9zYB2mRE8juTSmJhBRmgicyGTXbke8OX+3D2aOyYDX0TxfeeBClfD7wUlPuT3NGGkjPPtWGxMF/mg/b/E5WHj89uEEzHoyXk7TqEwZ7zUcD1Lw9JhXn4R+XzPewxZUuOR6Ug0rg49cGuUTYTsk/wywZBw9Y+rB3/Bsg=
   file: ./app/build/outputs/apk/release/app-release-unsigned.apk
   skip_cleanup: true
-  draft: true
   on:
     branch: master

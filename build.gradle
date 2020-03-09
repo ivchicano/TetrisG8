@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+import groovy.swing.SwingBuilder
 
 buildscript {
     repositories {
@@ -7,8 +8,7 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
-        
+        classpath 'com.android.tools.build:gradle:3.6.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -18,27 +18,13 @@ plugins {
   id "org.sonarqube" version "2.8"
 }
 
-def getCurrentGitBranch() {
-    def gitBranch = "Unknown branch"
-    try {
-        def workingDir = new File("${project.projectDir}")
-        def result = 'git rev-parse --abbrev-ref HEAD'.execute(null, workingDir)
-        result.waitFor()
-        if (result.exitValue() == 0) {
-            gitBranch = result.text.trim()
-        }
-    } catch (e) {
-    }
-    return gitBranch
-}
-
 sonarqube {
   properties {
     property "sonar.projectKey", "ivchicano_TetrisG8"
     property "sonar.organization", "ivchicano"
     property "sonar.host.url", "https://sonarcloud.io"
     property "sonar.login", "e562535d4d07ae2c2a059075fb525a52a3cad3b3"
-	property "sonar.branch.name", getCurrentGitBranch()
+	property "sonar.branch.name", System.getenv('BRANCH')
   }
 }
 
@@ -52,4 +38,73 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+String branch
+
+task gitBranch{
+    description "This task return the current branch name"
+    branch = ""
+    def branch_proc = 'git rev-parse --abbrev-ref HEAD'.execute()
+    branch_proc.in.eachLine { line -> branch = line }
+    branch_proc.err.eachLine { line -> println line }
+    branch_proc.waitFor()
+}
+task gitPull{
+    description "git pull on current branch or if we pass -PbranchName='name-of-the-branch' we will do pull of this branch"
+    dependsOn "gitBranch"
+    doLast{
+        exec{
+            if (project.hasProperty('branchName')){
+                branch=branchName
+            }
+            commandLine "git", "pull", "origin", branch.toString()
+        }
+    }
+}
+task gitAdd {
+    description "This task add all modified elements"
+    doLast {
+        exec{
+            commandLine "git", "add", "*"
+        }
+    }
+}
+task gitCommit{
+    description "This task do commit all the modified elements with a message that you enter on the dialog"
+    doLast {
+        System.setProperty('java.awt.headless', 'false')
+        new SwingBuilder().edt {
+            dialog(modal: true, title: 'Enter commit message', alwaysOnTop: true, resizable: false, locationRelativeTo: null, pack: true, show: true) {
+                vbox {
+                    label(text: "Please enter your commit message:")
+                    def input1 = textField()
+                    button(defaultButton: true, text: 'OK', actionPerformed: {
+                        commitMessage = input1.text;
+                        dispose();
+                        exec{
+                            commandLine "git", "commit", "-m", commitMessage
+                        }
+                    })
+                }
+            }
+        }
+    }
+}
+task gitPush {
+    description "git push on current branch"
+    dependsOn "gitBranch"
+    doLast{
+        exec{
+            commandLine "git", "push", "origin", branch.toString()
+        }
+    }
+}
+task gitCompletePush {
+    description "This task do all the processes to do push (add, commit and push)"
+    dependsOn "gitAdd"
+    dependsOn "gitCommit"
+    dependsOn "gitPush"
+    tasks.findByName("gitCommit").mustRunAfter "gitAdd"
+    tasks.findByName("gitPush").mustRunAfter "gitCommit"
 }
