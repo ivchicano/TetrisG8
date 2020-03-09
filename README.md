@@ -2,4 +2,4 @@
 
 # TetrisG8
 
-Este es el repositorio del Grupo 1 en la asignatura Calidad del Software, Grado en Ingeniería del Software en la URJC.
+Este es el repositorio del Grupo 1 en la asignatura Calidad del Software, Grado en Ingeniería del Software en la Universidad Rey Juan Carlos.
