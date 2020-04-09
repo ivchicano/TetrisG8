@@ -101,6 +101,19 @@
         android:textSize="24sp" />
 
     <Button
+        android:id="@+id/botPantallaPrincipal"
+        android:layout_width="262dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/dark"
+        android:fontFamily="monospace"
+        android:text="Main Screen"
+        android:textColor="#FFFFFF"
+        android:textSize="12pt" />
+
+    <Button
         android:id="@+id/botSalir"
         android:layout_width="262dp"
         android:layout_height="50dp"
@@ -112,6 +125,8 @@
         android:text="EXIT"
         android:textColor="#FFFFFF"
         android:textSize="12pt" />
+
+
 
 </LinearLayout>
 

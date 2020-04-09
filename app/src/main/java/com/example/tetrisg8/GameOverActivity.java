@@ -49,6 +49,8 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
         textViewPuntuacion.setText(String.valueOf(puntuacion));
         textViewTiempo = (TextView) findViewById(R.id.time);
         textViewTiempo.setText(String.valueOf( df.format(tiempo)));
+        Button btnMainScreen=this.findViewById(R.id.botPantallaPrincipal);
+        btnMainScreen.setOnClickListener(this);
         Button botonSalir = (Button) this.findViewById(R.id.botSalir);
         botonSalir.setOnClickListener(this);
         Button botonJugar = (Button) this.findViewById(R.id.botJugar);
@@ -107,9 +109,12 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
                 nameTextView[cont].append("     Name :" +res.getString(1) + "\n");
                 nameTextView[cont].append("     Score:"+res.getString(2) + "\n");
                 nameTextView[cont].append("     Time :" +res.getString(3) );
-
-
-                Bitmap image = BitmapFactory.decodeByteArray(res.getBlob(4),0,res.getBlob(4).length);
+                Bitmap image;
+                if (res.getBlob(4)!=null){
+                    image = BitmapFactory.decodeByteArray(res.getBlob(4),0,res.getBlob(4).length);
+                }else{
+                    image=BitmapFactory.decodeResource(this.getResources(), R.drawable.take_photo);
+                }
                 listimage[cont].setImageBitmap(image);
             }
             cont++;
@@ -129,15 +134,16 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
                 //TakePhoto.ventanaFoto.finish();
                 finish();
 
-            } else {
-                if(v.getId() == R.id.botJugar){
-                    /*Intent pantallaInicial = new Intent(this, StartGame.class);
-                    startActivity(pantallaInicial);*/
-                    Alert.ventanaNombre.finish();
-                    MainActivity.ventanaTablero.finish();
-                    //TakePhoto.ventanaFoto.finish();
-                    finish();
-                }
+            }else if(v.getId() == R.id.botJugar){
+                /*Intent pantallaInicial = new Intent(this, StartGame.class);
+                startActivity(pantallaInicial);*/
+                Alert.ventanaNombre.finish();
+                MainActivity.ventanaTablero.finish();
+                //TakePhoto.ventanaFoto.finish();
+                finish();
+            }else if (v.getId()==R.id.botPantallaPrincipal){
+                Intent intent= new Intent(this,StartGame.class);
+                startActivity(intent);
             }
         }
     }
