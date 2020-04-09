@@ -65,6 +65,9 @@ public class FuncionamientoJuego {
                 puntuacion += (30*lineasEliminadas);
                 controlarBotonRandom();
                 mainActivity.actualizarPuntuacion(puntuacion);
+                if (lineasEliminadas > 0) {
+                    mainActivity.siguienteMensajeLinea();
+                }
 
                 fichaView.invalidate();
                 gameView.invalidate();
