@@ -6,12 +6,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 
+import java.lang.reflect.Array;
+
 
 public class GameView extends View {
     private Tablero tablero;
     private Paint p;
-    private int[] arrayColores = {Color.RED, Color.WHITE, Color.MAGENTA, Color.BLUE, Color.GREEN, Color.GRAY, Color.CYAN};
-    private int[] arrayColoresAleatorios = {0, 0, 0, 0, 0, 0, 0};
+    private int[] arrayColores = {Color.RED, Color.WHITE, Color.MAGENTA, Color.BLUE, Color.GREEN, Color.GRAY, Color.CYAN, Color.YELLOW};
+    private int[] arrayColoresAleatorios = {0, 0, 0, 0, 0, 0, 0, 0};
 
     public GameView(Context context, Tablero tablero) {
         super(context);
@@ -23,7 +25,7 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas) { //Pinta la cuadrícula del tablero
         super.onDraw(canvas);
         pintarTablero(canvas);
-        if(tablero.getEnjuego() != null){
+        if (tablero.getEnjuego() != null) {
             pintarPieza(canvas);
             pintarPiezaExtra(canvas);
             pintarCuadricula(canvas);
@@ -100,7 +102,6 @@ public class GameView extends View {
 
     public int colorCelda(int codigo) {
         int color = 0;
-
         switch (codigo) {
             case -1:
                 color = Color.DKGRAY;
@@ -129,14 +130,17 @@ public class GameView extends View {
             case 7:
                 color = arrayColoresAleatorios[6];
                 break;
+            case 8:
+                color = arrayColoresAleatorios[7];
+                break;
         }
         return color;
     }
 
-    public void rellenarArray(int gama){
-        if(gama == 1){
+    public void rellenarArray(int gama) {
+        if (gama == 1) {
             rellenarArrayColoresAleatorios();
-        }else if(gama == 2){
+        } else if (gama == 2) {
             rellenarArrayColorFijo();
         }
     }
@@ -144,7 +148,7 @@ public class GameView extends View {
     public int[] rellenarArrayColorFijo() {
         int indice;
         int color;
-        indice = (int) Math.floor(Math.random() * 7);
+        indice = (int) Math.floor(Math.random() * 8);
         color = arrayColores[indice];
         for (int i = 0; i < arrayColoresAleatorios.length; i++) {
             arrayColoresAleatorios[i] = color;
@@ -156,10 +160,10 @@ public class GameView extends View {
         int indice;
         int color;
         for (int i = 0; i < arrayColoresAleatorios.length; i++) {
-            indice = (int) Math.floor(Math.random() * 7);
+            indice = (int) Math.floor(Math.random() * 8);
             color = arrayColores[indice];
             while (colorAsignado(color, i)) {
-                indice = (int) Math.floor(Math.random() * 7);
+                indice = (int) Math.floor(Math.random() * 8);
                 color = arrayColores[indice];
             }
             arrayColoresAleatorios[i] = color;

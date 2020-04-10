@@ -80,6 +80,9 @@ public class FichaView extends View {
             case 7:
                 color = arrayColoresAleatorios[6];
                 break;
+            case 8:
+                color = arrayColoresAleatorios[7];
+                break;
         }
         return color;
     }

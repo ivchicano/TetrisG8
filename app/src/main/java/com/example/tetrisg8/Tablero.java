@@ -46,6 +46,7 @@ public class Tablero {
             switch (tipoPieza) {
                 case "normal":
                     this.enjuego.getCuadrados()[i] += celdasBajar;
+
                     break;
                 case "extra":
                     this.piezaExtra.getCuadrados()[i] += celdasBajar;
@@ -144,7 +145,7 @@ public class Tablero {
     //Rotar pieza
     public boolean rotar(int grados) {
         //Si es la pieza es cuadrada no se rota
-        if (enjuego.getTipopieza() == 4)
+        if (enjuego.getTipopieza() == 8 || enjuego.getTipopieza() == 4)
             return false;
         //Coordenadas del ultimo cuadrado de la pieza
         int fila = enjuego.getCuadrados()[6];

@@ -65,7 +65,13 @@ public class MainActivity extends AppCompatActivity {
         if (tab.derecha())
             gameView.invalidate();
     }
-
+    public void changeNextPiece(View view){
+        Pieza p  = start.generarPiezaSiguiente();
+        start.setPiezaSiguiente(p);
+        tab.setPiezaSiguiente(p);
+        fichaView.setPiezaSiguiente(p);
+        gameView.invalidate();
+    }
     //rotate
     public void rotateAction(View view) {
         //Se intenta girar la ficha a la derecha, si ha sido posible se actualiza el canvas

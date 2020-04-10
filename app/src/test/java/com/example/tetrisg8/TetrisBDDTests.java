@@ -47,11 +47,6 @@ public class TetrisBDDTests {
         throw new PendingException();
     }
 
-    @When("^I click in the turn button$")
-    public void i_click_in_the_turn_button() throws Throwable {
-        throw new PendingException();
-    }
-
     @Then("^The Background music must start or stop$")
     public void the_background_music_must_startstop() throws Throwable {
         throw new PendingException();
@@ -72,14 +67,21 @@ public class TetrisBDDTests {
         throw new PendingException();
     }
 
-    @Then("^The user have to see how the piece change its color$")
-    public void the_user_have_to_see_how_the_piece_change_its_color() throws Throwable {
-        throw new PendingException();
-    }
 
     @And("^the displayed photo must be a predefinied photo$")
     public void the_displayed_photo_must_be_a_predefinied_photo() throws Throwable {
         throw new PendingException();
     }
 
+    @Then("^I will be redirect to end game screen$")
+    public void iWillBeRedirectToEndGameScreen() {
+    }
+
+    @When("^I click in the change next piece button$")
+    public void iClickInTheChangeNextPieceButton() {
+    }
+
+    @Then("^The user have to see how the next piece changes$")
+    public void theUserHaveToSeeHowTheNextPieceChanges() {
+    }
 }

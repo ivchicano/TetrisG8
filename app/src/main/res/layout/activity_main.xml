@@ -40,7 +40,9 @@
                 android:orientation="vertical"
                 android:paddingLeft="15dp"
                 android:paddingTop="70dp"
-                android:paddingBottom="100dp"></LinearLayout>
+                android:paddingBottom="100dp">
+
+            </LinearLayout>
 
             <LinearLayout
 
@@ -175,6 +177,19 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/buttonLeft"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/changeNextPiece"
+            android:layout_width="74dp"
+            android:layout_height="78dp"
+            android:background="@drawable/change_piece"
+            android:onClick="changeNextPiece"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.69"
+            app:layout_constraintStart_toEndOf="@+id/buttonPiezaRandom"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -26,11 +26,11 @@ As app user, I would like to be able to choose if the background music is active
     Given The player is playing the game
      When Appears a new piece on the board
      Then The user have to see a new different piece that not exists until now 
-  Feature: Change color of a piece in runtime
-  As a Product Owner, I would like to change the color of a piece when I click the turn button for give better visual effects
+  Feature: Change next piece in runtime
+  As a Product Owner, I would like that the user can change the next piece when I he click on a button for a better game experience
   Scenario: A screen game
     Given The player is playing the game
-     When I click in the turn button
-     Then The user have to see how the piece change its color
+     When I click in the change next piece button
+     Then The user have to see how the next piece changes
   
   

@@ -177,7 +177,7 @@ public class FuncionamientoJuego {
     }
 
     public int generarTipoPiezaRandom() {
-        return new SecureRandom().nextInt(6) + 1;
+        return new SecureRandom().nextInt(8) + 1;
     }
 
     public Pieza generarPieza(int desplazamientoColumnas) {
@@ -238,4 +238,7 @@ public class FuncionamientoJuego {
         return this.tiempoBotonDesactivado;
     }
 
+    public void setPiezaSiguiente(Pieza piezaSiguiente) {
+        this.piezaSiguiente = piezaSiguiente;
+    }
 }
