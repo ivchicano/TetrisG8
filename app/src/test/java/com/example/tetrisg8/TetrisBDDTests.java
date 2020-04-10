@@ -52,7 +52,7 @@ public class TetrisBDDTests {
         throw new PendingException();
     }
 
-    @Then("^I will be redirect to end game screen $")
+    @Then("^I will be redirect to end game screen$")
     public void i_will_be_redirect_to_end_game_screen() throws Throwable {
         throw new PendingException();
     }
