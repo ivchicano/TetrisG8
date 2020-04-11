@@ -30,6 +30,10 @@ public class FichaView extends View {
 
     }
 
+    public Pieza getPiezaSiguiente() {
+        return piezaSiguiente;
+    }
+
     public void pintarPieza(Canvas canvas) {
         int anchoCelda = this.getWidth() / 5;
         int altoCelda = this.getHeight() / 10;

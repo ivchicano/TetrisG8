@@ -11,7 +11,6 @@ public class Pieza {
 
     public Pieza(int tipo, int despFila, int despCol) {
         tipopieza = tipo;
-        System.out.println(tipo);
         //Posicion inicial de las celdas en funcion del tipo
         switch (tipo) {
             case 1://tipo I
@@ -24,7 +23,7 @@ public class Pieza {
                 cuadrados = new int[]{0+despFila, 3 + despCol, 1+despFila, 3 + despCol, 2+despFila, 3 + despCol, 2+despFila, 4 + despCol};
                 break;
             case 4://tipo O
-                cuadrados = new int[]{0+despFila, 3 + despCol, 0+despFila, 3 + despCol, 0+despFila, 3 + despCol, 0+despFila, 3 + despCol};
+                cuadrados = new int[]{0+despFila, 3 + despCol, 1+despFila, 3 + despCol, 0+despFila, 4 + despCol, 1+despFila, 4 + despCol};
                 break;
             case 5://tipo S
                 cuadrados = new int[]{1+despFila, 3 + despCol, 0+despFila, 4 + despCol, 1+despFila, 4 + despCol, 0+despFila, 5 + despCol};
@@ -36,15 +35,14 @@ public class Pieza {
                 cuadrados = new int[]{0+despFila, 3 + despCol, 0+despFila, 4 + despCol, 1+despFila, 4 + despCol, 1+despFila, 5 + despCol};
                 break;
             case 8://tipo .
-                cuadrados = new int[]{0+despFila, 3 + despCol, 1+despFila, 3 + despCol, 0+despFila, 4 + despCol, 1+despFila, 4 + despCol};
+                cuadrados = new int[]{0+despFila, 3 + despCol, 0+despFila, 3 + despCol, 0+despFila, 3 + despCol, 0+despFila, 3 + despCol};
                 break;
+
         }
     }
 
     //Constructora para las piezas siguientes, que deben mostrarse diferentes
     public Pieza(int tipo){
-        System.out.println(tipo);
-
         tipopieza = tipo;
         //Posicion inicial de las celdas en funcion del tipo
         switch (tipo) {
@@ -59,8 +57,9 @@ public class Pieza {
                 cuadrados = new int[]{4, 2, 5, 2, 6, 2, 6, 3};
                 break;
             case 4://tipo O
-                cuadrados = new int[]{4, 1, 4, 1, 4, 1, 4, 1};
+                cuadrados = new int[]{4, 1, 5, 1, 4, 2, 5, 2};
                 break;
+
             case 5://tipo S
                 cuadrados = new int[]{5, 1, 4, 2, 5, 2, 4, 3};
                 break;
@@ -70,8 +69,8 @@ public class Pieza {
             case 7://tipo Z
                 cuadrados = new int[]{4, 1, 4, 2, 5, 2, 5, 3};
                 break;
-            case 8://tipo O
-                cuadrados = new int[]{4, 1, 5, 1, 4, 2, 5, 2};
+            case 8://tipo .
+                cuadrados = new int[]{4, 1, 4, 1, 4, 1, 4, 1};
                 break;
         }
     }

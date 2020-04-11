@@ -88,6 +88,14 @@ public class FuncionamientoJuego {
         fichaView.rellenarArray(gamaColores, colores);
     }
 
+    public Pieza getPiezaSiguiente() {
+        return piezaSiguiente;
+    }
+
+    public GameView getGameView() {
+        return gameView;
+    }
+
     public void controlarPiezaNormal() {
         df = new SimpleDateFormat("mm:ss");
         if (tablero.getEnjuego() == null) {
