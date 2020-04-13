@@ -146,6 +146,11 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(intent);
             }
         }
+
+    public Bitmap getFoto() {
+        return foto;
     }
+
+}
 
 

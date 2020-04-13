@@ -14,12 +14,14 @@ import static org.mockito.Mockito.mock;
 
 
 public class TetrisBDDTests {
-    GameOverActivity gameOverActivity;
+
     private GameView gameView = mock(GameView.class);
     private FichaView fichaView = mock(FichaView.class);
     private Tablero tablero = mock(Tablero.class);
     private FuncionamientoJuego funcionamientoJuego;
     private MainActivity mainActivity = mock(MainActivity.class);
+    private TakePhoto takePhoto = mock(TakePhoto.class);
+    private GameOverActivity gameOverActivity = mock(GameOverActivity.class);
     Pieza piezaSiguienteAntigua;
     Pieza nuevaPieza;
 
@@ -61,17 +63,14 @@ public class TetrisBDDTests {
     //endregion
 
     //region skip photo
-    @Given("^I want to skip take photo step$")
-    public void iWantToSkipTakePhotoStep() {
-    }
-
     @When("^I click on skip button$")
     public void iClickOnSkipButton() {
+        takePhoto.skip(null);
     }
 
     @Then("^The image saved will be a predefinied photo$")
     public void theImageSavedWillBeAPredefiniedPhoto() {
-        assertEquals(1, 2);
+        assertNull(gameOverActivity.getFoto());
     }
     //endregion
 
