@@ -1,0 +1,15 @@
+reinstall_apps
+start_test_server_in_background
+query("*")
+query("*")
+stop
+help
+help
+.stop
+stop
+"
+exit
+query("*")
+reinstall_apps
+start_test_server_in_background
+query("*")
