@@ -254,4 +254,13 @@ public class FuncionamientoJuego {
     public void setPiezaSiguiente(Pieza piezaSiguiente) {
         this.piezaSiguiente = piezaSiguiente;
     }
+
+    public boolean isMusicEnable() {
+        return musicEnable;
+    }
+
+    public void setMusicEnable(boolean musicEnable) {
+        this.musicEnable = musicEnable;
+    }
+
 }

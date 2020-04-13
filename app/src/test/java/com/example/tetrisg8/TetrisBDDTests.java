@@ -1,54 +1,16 @@
 package com.example.tetrisg8;
 
-import android.app.Activity;
-import android.content.ComponentName;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.MatrixCursor;
-import android.database.MergeCursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.preference.Preference;
-import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.widget.Button;
-import android.support.test.*;
 
 import androidx.preference.PreferenceManager;
-import androidx.test.InstrumentationRegistry;
-import androidx.test.rule.ActivityTestRule;
 
-import cucumber.api.PendingException;
-import cucumber.api.android.CucumberInstrumentation;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.And;
-import cucumber.api.junit.Cucumber;
-
-import org.junit.Rule;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.mockito.internal.matchers.Null;
-import org.mockito.stubbing.Answer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 
 import static org.junit.Assert.*;
 
-import static org.mockito.ArgumentMatchers.anyListOf;
-import static org.mockito.ArgumentMatchers.anyObject;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 
 public class TetrisBDDTests {
@@ -62,32 +24,39 @@ public class TetrisBDDTests {
     Pieza nuevaPieza;
 
     //region main screen
-
-
-    @Given("^i want to be able to go to main screen from end game screen$")
-    public void iWantToBeAbleToGoToMainScreenFromEndGameScreen() {
-    }
-
     @When("^I click main screen button$")
     public void iClickMainScreenButton() {
     }
 
     @Then("^I will be redirect to the main screen$")
     public void iWillBeRedirectToTheMainScreen() {
+        assertEquals(1, 2);
     }
     //endregion
 
-    //region start/stop music
-    @Given("^I want to be able to choose if the music is playing$")
-    public void iWantToBeAbleToChooseIfTheMusicIsPlaying() {
+    //region music
+    @When("^I choose play background music option$")
+    public void iChoosePlayBackgroundMusicOption() {
+        funcionamientoJuego = new FuncionamientoJuego(gameView, fichaView, tablero, "test", null);
+        funcionamientoJuego.setMainActivity(mainActivity);
+        funcionamientoJuego.setMusicEnable(true);
     }
 
-    @When("^I choose Play or stop background music option$")
-    public void iChoosePlayOrStopBackgroundMusicOption() {
+    @Then("^The Background music must start$")
+    public void theBackgroundMusicMustStart() {
+        assertTrue(funcionamientoJuego.isMusicEnable());
     }
 
-    @Then("^The Background music must start or stop$")
-    public void theBackgroundMusicMustStartOrStop() {
+    @When("^I choose stop background music option$")
+    public void iChooseStopBackgroundMusicOption() {
+        funcionamientoJuego = new FuncionamientoJuego(gameView, fichaView, tablero, "test", null);
+        funcionamientoJuego.setMainActivity(mainActivity);
+        funcionamientoJuego.setMusicEnable(false);
+    }
+
+    @Then("^The Background music must stop$")
+    public void theBackgroundMusicMustStop() {
+        assertFalse(funcionamientoJuego.isMusicEnable());
     }
     //endregion
 
@@ -102,11 +71,11 @@ public class TetrisBDDTests {
 
     @Then("^The image saved will be a predefinied photo$")
     public void theImageSavedWillBeAPredefiniedPhoto() {
+        assertEquals(1, 2);
     }
     //endregion
 
     //region Add a new piece
-
     @When("^Appears a new piece on the board$")
     public void appears_a_new_piece_on_the_board() throws Throwable {
         nuevaPieza = new Pieza(8);
@@ -119,7 +88,6 @@ public class TetrisBDDTests {
     //endregion
 
     //region change next piece
-
     @Given("^The player is playing the game$")
     public void the_player_is_playing_the_game() throws Throwable {
         funcionamientoJuego = new FuncionamientoJuego(gameView, fichaView, tablero, "test", null);
@@ -139,8 +107,6 @@ public class TetrisBDDTests {
         Pieza p = funcionamientoJuego.getPiezaSiguiente();
         assertNotEquals(piezaSiguienteAntigua, p);
     }
-
-
-
     //endregion
+
 }
