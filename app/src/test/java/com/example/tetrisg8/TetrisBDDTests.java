@@ -1,34 +1,13 @@
 package com.example.tetrisg8;
 
-import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.Preference;
-import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.widget.Button;
-import android.support.test.*;
-
-import androidx.preference.PreferenceManager;
-import androidx.test.rule.ActivityTestRule;
 
 import cucumber.api.PendingException;
-import cucumber.api.android.CucumberInstrumentation;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.And;
-import cucumber.api.junit.Cucumber;
-
-import org.junit.Rule;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-
 import java.util.List;
-import java.util.logging.Logger;
 
 import static org.junit.Assert.*;
 
@@ -36,10 +15,6 @@ import static org.mockito.Mockito.mock;
 
 
 public class TetrisBDDTests {
-  //@Rule
-  //ActivityTestRule<StartGame> mActivityTestRule = new ActivityTestRule<>(StartGame.class);
-   // public ActivityTestRule<StartGame> activityTestRule = new ActivityTestRule<>(StartGame.class);
-    GameOverActivity gameOverActivity;
     private GameView gameView = mock(GameView.class);
     private FichaView fichaView = mock(FichaView.class);
     private Tablero tablero = mock(Tablero.class);
@@ -95,27 +70,6 @@ public class TetrisBDDTests {
     }
     //endregion
 
-    //region go to main screen
-    @Given("^A button$")
-    public void a_button() throws Throwable {
-        gameOverActivity = mock(GameOverActivity.class);
-    }
-    @When("^I click on it$")
-    public void i_click_on_it() throws Throwable {
-        gameOverActivity.onClick(gameOverActivity.findViewById(R.id.botPantallaPrincipal));
-    }
-    @Then("^I will be redirect to the main screen$")
-    public void i_will_be_redirect_to_the_main_screen() throws Throwable {
-
-        //StartGame s = mActivityTestRule.getActivity();
-        StartGame startGame = mock(StartGame.class);
-        //System.out.println(gameOverActivity.getCallingActivity().getClassName());
-        //System.out.println(StartGame.class.getName());
-        //View s1 = gameOverActivity.getCurrentFocus();
-        String s2 =  startGame.getClass().getName();
-        assertEquals(true,true);
-    }
-    //endregion
 
     //region Add a new piece
 
@@ -150,4 +104,23 @@ public class TetrisBDDTests {
         assertNotEquals(piezaSiguienteAntigua,p);
     }
     //endregion
+
+    @Given("^I want to the user loses 20 points$")
+    public void iWantToTheUserLosesPoints() {
+        funcionamientoJuego = new FuncionamientoJuego(gameView, fichaView, tablero, "test", null);
+        funcionamientoJuego.setMainActivity(mainActivity);
+        assertEquals(0, funcionamientoJuego.getPuntuacion());
+        funcionamientoJuego.setPuntuacion(1000);
+    }
+
+    @When("^I click on the change next piece button$")
+    public void iClickOnTheChangeNextPieceButton() {
+        assertEquals(1000, funcionamientoJuego.getPuntuacion());
+        funcionamientoJuego.losePointsWhenClickOnNextPiece();
+    }
+
+    @Then("^The points has to decrease 20 units$")
+    public void thePointsHasToDecreaseUnits() {
+        assertEquals(980, funcionamientoJuego.getPuntuacion());
+    }
 }

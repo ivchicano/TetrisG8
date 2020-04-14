@@ -254,4 +254,8 @@ public class FuncionamientoJuego {
     public void setPiezaSiguiente(Pieza piezaSiguiente) {
         this.piezaSiguiente = piezaSiguiente;
     }
+
+    public void losePointsWhenClickOnNextPiece(){
+        this.setPuntuacion(this.getPuntuacion()-20);
+    }
 }

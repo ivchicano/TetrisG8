@@ -66,13 +66,14 @@ public class MainActivity extends AppCompatActivity {
             gameView.invalidate();
     }
     public void changeNextPiece(View view){
-        System.out.println("Dentro prueba");
         Pieza p  = start.generarPiezaSiguiente();
         start.setPiezaSiguiente(p);
         tab.setPiezaSiguiente(p);
         fichaView.setPiezaSiguiente(p);
         gameView.invalidate();
+        start.losePointsWhenClickOnNextPiece();
     }
+
 
     public void setStart(FuncionamientoJuego start) {
         this.start = start;
