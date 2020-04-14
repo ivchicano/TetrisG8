@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private GameView gameView;
     private FichaView fichaView;
     private TextView caja_score;
+    private MensajeLinea mensajeLinea;
     private String namePlayer;
     private Button botonPiezaRandom;
 
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         tab.inicializarTablero();
         this.gameView = new GameView(this, tab);
         this.fichaView = new FichaView(this);
+
+        this.mensajeLinea = new MensajeLinea((TextView) findViewById(R.id.lineMessage));
 
         LinearLayout gameLayout = (LinearLayout) findViewById(R.id.gameView);
         LinearLayout fichaLayout = (LinearLayout) findViewById(R.id.fichaView);
@@ -141,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
         desactivarBotonPiezaRandom();
         start.setTiempoBotonDesactivado(0);
         start.reducirPuntuacionPiezaRandom();
+    }
+
+    public String siguienteMensajeLinea() {
+        return mensajeLinea.siguienteMensaje();
     }
 }
 
