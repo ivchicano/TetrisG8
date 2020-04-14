@@ -3,7 +3,7 @@ rerun/
 reports/
 screenshots/
 screenshot*.png
-test-servers/
+test_servers/
 
 # bundler
 .bundle
