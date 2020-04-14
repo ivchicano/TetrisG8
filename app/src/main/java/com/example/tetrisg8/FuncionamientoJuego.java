@@ -255,6 +255,15 @@ public class FuncionamientoJuego {
         this.piezaSiguiente = piezaSiguiente;
     }
 
+    public boolean isMusicEnable() {
+        return musicEnable;
+    }
+
+    public void setMusicEnable(boolean musicEnable) {
+        this.musicEnable = musicEnable;
+    }
+
+
     public void losePointsWhenClickOnNextPiece(){
         this.setPuntuacion(this.getPuntuacion()-20);
     }
