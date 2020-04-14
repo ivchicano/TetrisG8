@@ -1,15 +1,50 @@
+query("*")
+query("*")
+query("*")
+reinstall_apps
+start_test_server_in_background .
+query("*",gameview)
+query("*",:gameview)
+query("*",:gameview)
+query("*",:gameView)
+query("*")
+query("*")
+reinstall_apps
+start_test_server_in_background
+query("LinearLayout id:'fichaView", :getBackground, :getColor)
+query("LinearLayout id:'fichaView'", :getBackground, :getColor)
+query("LinearLayout id:'fichaView'", :getBackground, :getColor)
+query("LinearLayout id:'fichaView'")
+query("LinearLayout id:'fichaView'",:currentTextColor)
+query("LinearLayout id:'fichaView'",:hintTextColor)
+query("LinearLayout id:'fichaView'",:getBackground)
+query("LinearLayout id:'fichaView'",:getColor)
+query("LinearLayout id:'fichaView'",:shadowColor)
+query("LinearLayout id:'fichaView':0",)
+query("LinearLayout id:'fichaView':0",:width)
+query("LinearLayout id:'fichaView':0",:x)
+query("LinearLayout id:'fichaView':0",:x)
+query("LinearLayout id:'fichaView':0",:y)
+query("LinearLayout id:'fichaView':0",:getX)
+query("LinearLayout id:'fichaView':0",:getr)
+query("LinearLayout id:'fichaView':0",:getY)
+query("LinearLayout id:'fichaView':0",:get)
+query("LinearLayout id:'fichaView'",:x)
+query("LinearLayout id:'fichaView':5",:x)
+query("LinearLayout id:'fichaView':5",:x)
+query("LinearLayout id:'fichaView':6",:x)
+query("LinearLayout id:'fichaView':63",:x)
+query("LinearLayout id:'fichaView')
+query("LinearLayout id:'fichaView'")
+query("LinearLayout id:'fichaView'",:rect)
+query("LinearLayout id:'fichaView'")
+query("LinearLayout id:'fichaView'")
+restart_apps
+reinstall_apps
+start_test_server_in_background
+query("LinearLayout id:'fichaView'")
+query("LinearLayout id:'fichaView'")
 reinstall_apps
 start_test_server_in_background
 query("*")
-query("*")
-stop
-help
-help
-.stop
-stop
-"
-exit
-query("*")
-reinstall_apps
-start_test_server_in_background
 query("*")
