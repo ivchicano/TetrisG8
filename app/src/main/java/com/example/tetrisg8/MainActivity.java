@@ -65,6 +65,18 @@ public class MainActivity extends AppCompatActivity {
         if (tab.derecha())
             gameView.invalidate();
     }
+    public void changeNextPiece(View view){
+        System.out.println("Dentro prueba");
+        Pieza p  = start.generarPiezaSiguiente();
+        start.setPiezaSiguiente(p);
+        tab.setPiezaSiguiente(p);
+        fichaView.setPiezaSiguiente(p);
+        gameView.invalidate();
+    }
+
+    public void setStart(FuncionamientoJuego start) {
+        this.start = start;
+    }
 
     //rotate
     public void rotateAction(View view) {

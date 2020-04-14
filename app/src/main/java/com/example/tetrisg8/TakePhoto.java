@@ -47,6 +47,14 @@ public class TakePhoto extends AppCompatActivity {
         finish();*/
 
     }
+    public void skip(View view) {
+        db.updateData(null);
+        Intent goToMain = new Intent(this, GameOverActivity.class);
+        goToMain.putExtra("puntuacion", puntuacion);
+        goToMain.putExtra("tiempo", tiempo);
+        goToMain.putExtra("foto", imagen);
+        startActivity(goToMain);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

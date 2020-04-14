@@ -30,6 +30,10 @@ public class FichaView extends View {
 
     }
 
+    public Pieza getPiezaSiguiente() {
+        return piezaSiguiente;
+    }
+
     public void pintarPieza(Canvas canvas) {
         int anchoCelda = this.getWidth() / 5;
         int altoCelda = this.getHeight() / 10;
@@ -79,6 +83,9 @@ public class FichaView extends View {
                 break;
             case 7:
                 color = arrayColoresAleatorios[6];
+                break;
+            case 8:
+                color = arrayColoresAleatorios[7];
                 break;
         }
         return color;
