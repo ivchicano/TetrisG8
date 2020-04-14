@@ -70,9 +70,6 @@ before-script:
     done
 
     echo "Emulator is ready"
-  # - adb shell settings put global window_animation_scale 0 &
-  # - adb shell settings put global transition_animation_scale 0 &
-  # - adb shell settings put global animator_duration_scale 0 &
   - adb shell input keyevent 82 &
   - ./gradlew clean assembleRelease -PdisablePreDex --continue --stacktrace
   # Crear keystore
@@ -83,9 +80,9 @@ script:
   # Unitarios
   - "./gradlew test"
   # Calabash
-  - calabash-android resign $HOME/app/build/outputs/apk/release/app-release-unsigned.apk
+  - calabash-android resign ./app/build/outputs/apk/release/app-release-unsigned.apk
   - cd app/src/test/java/com/example/tetrisg8/calabash
-  - calabash-android run $HOME/app/build/outputs/apk/release/app-release-unsigned.apk
+  - calabash-android run ~/build/outputs/apk/release/app-release-unsigned.apk
   - cd $HOME
   # Si estamos en develop ejecutar sonar
   - if [ "$BRANCH" = "develop" ]; then ./gradlew sonarqube; fi
