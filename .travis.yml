@@ -75,10 +75,12 @@ before-script:
   # - adb shell settings put global animator_duration_scale 0 &
   - adb shell input keyevent 82 &
   - ./gradlew clean assembleRelease -PdisablePreDex --continue --stacktrace
+  # Crear keystore
+  - keytool -genkey -alias androiddebugkey -keystore ~/.android/debug.keystore -storetype PKCS12 -keyalg RSA -storepass android -keysize 2048 -dname "CN=Android Debug,O=Android,C=US"
 
 script:
   # Ejecutar tests siempre
-  # Primero unitarios
+  # Unitarios
   - "./gradlew test"
   # Calabash
   - calabash-android resign ./app/build/outputs/apk/release/app-release-unsigned.apk
