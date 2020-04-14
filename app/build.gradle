@@ -33,10 +33,6 @@ dependencies {
     testImplementation 'info.cukes:cucumber-android:1.2.5'
     testImplementation 'info.cukes:cucumber-picocontainer:1.2.5'
     testImplementation 'info.cukes:cucumber-junit:1.2.5'
-    testImplementation 'com.android.support.test:rules:1.0.2'
-    testImplementation 'com.android.support.test:runner:1.0.2'
-    testImplementation 'com.android.support.test.espresso:espresso-core:3.1.0'
-    testImplementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
 
     // Core library
     androidTestImplementation 'androidx.test:core:1.2.0'
