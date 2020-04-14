@@ -15,9 +15,14 @@ env:
     - SLAVE_AAPT_TIMEOUT=40
 android:
   components:
+    - tools
+    - platform-tools
     - build-tools-29.0.3
     - android-29
     - sys-img-armeabi-v7a-addon-google_apis-google-29
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
 before_install:
   # Instalar calabash
   - rvm install 2.7.1
@@ -29,7 +34,7 @@ before-script:
   - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
   - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
   # Encendemos el emulador de android para los tests que lo necesiten
-  - echo no | android create avd --force --name test -k "system-images;android-29;default;x86_64" -c 10M
+  - echo no | avdmanager create avd --force --name test -k "system-images;android-29;default;x86_64" -c 10M
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell settings put global window_animation_scale 0 &
