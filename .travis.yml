@@ -20,7 +20,6 @@ android:
     - sys-img-armeabi-v7a-android-29
 before_install:
   # Instalar calabash
-  - ls
   - rvm install 2.7.1
   - bundle install --jobs=3 --retry=3
 before-script:
@@ -30,7 +29,7 @@ before-script:
   - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
   - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
   # Encendemos el emulador de android para los tests que lo necesiten
-  - echo no | android create avd --force --name test --target android-29 --abi google_apis/armeabi-v7a
+  - echo no | android create avd --force --name test --target android-29 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell settings put global window_animation_scale 0 &
