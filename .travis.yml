@@ -29,8 +29,8 @@ before_install:
   - echo y | sdkmanager --no_https "tools" >/dev/null
   - echo y | sdkmanager --no_https "build-tools;$BUILD_TOOLS" >/dev/null
   - echo y | sdkmanager --no_https "platforms;android-$COMPILE_SDK_VERSION" >/dev/null
-  - echo y | sdkmanager --no_https "emulator"
-  - echo y | sdkmanager --no_https "system-images;android-$API;$EMU_FLAVOR;$ABI"
+  - echo y | sdkmanager --no_https "emulator" >/dev/null
+  - echo y | sdkmanager --no_https "system-images;android-$API;$EMU_FLAVOR;$ABI" >/dev/null
   # Activar KVM
   - sudo -E apt-get -yq --no-install-suggests --no-install-recommends install bridge-utils libpulse0 libvirt-bin qemu-kvm virtinst ubuntu-vm-builder
   - sudo adduser $USER libvirt
@@ -82,6 +82,8 @@ script:
   # Unitarios
   - "./gradlew test"
   # Calabash
+  - adb start-server
+  - adb devices
   - bundle exec calabash-android resign ./app/build/outputs/apk/release/app-release-unsigned.apk
   - cd app/src/test/java/com/example/tetrisg8/calabash
   - bundle exec calabash-android run ../../../../../../../build/outputs/apk/release/app-release-unsigned.apk
