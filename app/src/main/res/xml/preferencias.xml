@@ -5,4 +5,10 @@
         android:entryValues="@array/numGamas"
         android:key="lista"
         android:title="Seleccione la gama de colores"></ListPreference>
+
+    <ListPreference
+        android:entries="@array/list"
+        android:entryValues="@array/numList"
+        android:key="musicList"
+        android:title="Música"></ListPreference>
 </PreferenceScreen>

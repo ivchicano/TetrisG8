@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 public class FuncionamientoJuego {
 
     private MainActivity mainActivity;
+    private boolean musicEnable;
 
     private GameView gameView;
     private FichaView fichaView;
@@ -54,8 +55,8 @@ public class FuncionamientoJuego {
             mainActivity.runOnUiThread(new TimerTask() {
                 @Override
                 public void run() {
-
-                controlarMusica.controlarMusica(tiempoTranscurrido);
+                if (musicEnable)
+                    controlarMusica.controlarMusica(tiempoTranscurrido);
                 controlarPiezaNormal();
                 controlarPiezaExtra();
                 acortarTablero();
@@ -84,9 +85,18 @@ public class FuncionamientoJuego {
         tiempoTranscurrido = 0;
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mainActivity);
         int gamaColores = Integer.parseInt(pref.getString("lista", "1"));
+        musicEnable=Integer.parseInt(pref.getString("musicList", "1"))==1;
         gameView.rellenarArray(gamaColores);
         int[] colores = gameView.getArrayColoresAleatorios();
         fichaView.rellenarArray(gamaColores, colores);
+    }
+
+    public Pieza getPiezaSiguiente() {
+        return piezaSiguiente;
+    }
+
+    public GameView getGameView() {
+        return gameView;
     }
 
     public void controlarPiezaNormal() {
@@ -106,7 +116,8 @@ public class FuncionamientoJuego {
                         db.insertData(namePlayer,String.valueOf(puntuacion),String.valueOf(df.format(tiempoTranscurrido)));
                     }
                     mainActivity.pantallaGameOver();
-                    controlarMusica.stopMediaPlayer();
+                    if (musicEnable)
+                        controlarMusica.stopMediaPlayer();
                 } else {
                     tablero.asignarPieza(tablero.getEnjuego());
                     Pieza pieza = new Pieza(piezaSiguiente.getTipopieza(),tablero.getFilaInicial(), 0);
@@ -143,7 +154,8 @@ public class FuncionamientoJuego {
                     db.insertData(namePlayer,String.valueOf(puntuacion),String.valueOf(df.format(tiempoTranscurrido)));
                 }
                 mainActivity.pantallaGameOver();
-                controlarMusica.stopMediaPlayer();
+                if (musicEnable)
+                    controlarMusica.stopMediaPlayer();
             } else {
                 tablero.asignarPieza(piezaExtra);
                 piezaExtra = null;
@@ -176,11 +188,12 @@ public class FuncionamientoJuego {
 
     public void finalizarTimer() {
         timer.cancel();
-        controlarMusica.stopMediaPlayer();
+        if (musicEnable)
+            controlarMusica.stopMediaPlayer();
     }
 
     public int generarTipoPiezaRandom() {
-        return new SecureRandom().nextInt(6) + 1;
+        return new SecureRandom().nextInt(8) + 1;
     }
 
     public Pieza generarPieza(int desplazamientoColumnas) {
@@ -241,4 +254,20 @@ public class FuncionamientoJuego {
         return this.tiempoBotonDesactivado;
     }
 
+    public void setPiezaSiguiente(Pieza piezaSiguiente) {
+        this.piezaSiguiente = piezaSiguiente;
+    }
+
+    public boolean isMusicEnable() {
+        return musicEnable;
+    }
+
+    public void setMusicEnable(boolean musicEnable) {
+        this.musicEnable = musicEnable;
+    }
+
+
+    public void losePointsWhenClickOnNextPiece(){
+        this.setPuntuacion(this.getPuntuacion()-20);
+    }
 }

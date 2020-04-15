@@ -2,6 +2,7 @@ package com.example.tetrisg8;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -107,9 +108,12 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
                 nameTextView[cont].append("     Name :" +res.getString(1) + "\n");
                 nameTextView[cont].append("     Score:"+res.getString(2) + "\n");
                 nameTextView[cont].append("     Time :" +res.getString(3) );
-
-
-                Bitmap image = BitmapFactory.decodeByteArray(res.getBlob(4),0,res.getBlob(4).length);
+                Bitmap image;
+                if (res.getBlob(4)!=null){
+                    image = BitmapFactory.decodeByteArray(res.getBlob(4),0,res.getBlob(4).length);
+                }else{
+                    image=BitmapFactory.decodeResource(this.getResources(), R.drawable.take_photo);
+                }
                 listimage[cont].setImageBitmap(image);
             }
             cont++;
@@ -129,17 +133,20 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
                 //TakePhoto.ventanaFoto.finish();
                 finish();
 
-            } else {
-                if(v.getId() == R.id.botJugar){
-                    /*Intent pantallaInicial = new Intent(this, StartGame.class);
-                    startActivity(pantallaInicial);*/
-                    Alert.ventanaNombre.finish();
-                    MainActivity.ventanaTablero.finish();
-                    //TakePhoto.ventanaFoto.finish();
-                    finish();
-                }
+            }else if(v.getId() == R.id.botJugar){
+                /*Intent pantallaInicial = new Intent(this, StartGame.class);
+                startActivity(pantallaInicial);*/
+                Alert.ventanaNombre.finish();
+                MainActivity.ventanaTablero.finish();
+                //TakePhoto.ventanaFoto.finish();
+                finish();
             }
         }
+
+    public Bitmap getFoto() {
+        return foto;
     }
+
+}
 
 
