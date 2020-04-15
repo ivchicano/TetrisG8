@@ -35,7 +35,7 @@ before_install:
   - echo y | sdkmanager --no_https "emulator" >/dev/null
   - echo y | sdkmanager --no_https "system-images;android-$API;$EMU_FLAVOR;$ABI" >/dev/null
   # Activar KVM
-  - sudo -E apt-get -yq --no-install-suggests --no-install-recommends install bridge-utils libpulse0 libvirt-bin qemu-kvm virtinst ubuntu-vm-builder
+  - sudo -E apt-get -yq --no-install-suggests --no-install-recommends install bridge-utils libpulse0 libvirt-bin qemu-kvm virtinst ubuntu-vm-builder libxcursor-dev:i386
   - sudo adduser $USER libvirt
   - sudo adduser $USER kvm
   # Instalar calabash
@@ -51,7 +51,7 @@ before-script:
   - sleep 3
   - echo no | avdmanager create avd --force --name test -k "system-images;android-29;default;x86_64" -c 10M
   - |
-    EMU_PARAMS="-verbose -selinux permissive -qemu -m 2048"
+    EMU_PARAMS="-verbose"
     EMU_COMMAND="emulator"
     sudo -E sudo -u $USER -E bash -c "${ANDROID_HOME}/emulator/${EMU_COMMAND} -avd test ${AUDIO} ${EMU_PARAMS} &"
   - |
