@@ -45,6 +45,9 @@ before-script:
   - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
   - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
   # Encendemos el emulador de android para los tests que lo necesiten
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
   - echo no | avdmanager create avd --force --name test -k "system-images;android-29;default;x86_64" -c 10M
   - |
     EMU_PARAMS="-verbose -selinux permissive -qemu -m 2048"
