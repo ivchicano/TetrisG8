@@ -80,9 +80,9 @@ script:
   # Unitarios
   - "./gradlew test"
   # Calabash
-  - calabash-android resign ./app/build/outputs/apk/release/app-release-unsigned.apk
+  - bundle exec calabash-android resign ./app/build/outputs/apk/release/app-release-unsigned.apk
   - cd app/src/test/java/com/example/tetrisg8/calabash
-  - calabash-android run ../../../../../../../build/outputs/apk/release/app-release-unsigned.apk
+  - bundle exec calabash-android run ../../../../../../../build/outputs/apk/release/app-release-unsigned.apk
   - cd $HOME
   # Si estamos en develop ejecutar sonar
   - if [ "$BRANCH" = "develop" ]; then ./gradlew sonarqube; fi
