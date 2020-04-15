@@ -70,7 +70,6 @@ before-script:
     done
 
     echo "Emulator is ready"
-  - adb shell input keyevent 82 &
   - ./gradlew clean assembleRelease -PdisablePreDex --continue --stacktrace
   # Crear keystore
   - keytool -genkey -alias androiddebugkey -keystore ~/.android/debug.keystore -storetype PKCS12 -keyalg RSA -storepass android -keysize 2048 -dname "CN=Android Debug,O=Android,C=US"
