@@ -1,7 +1,5 @@
 language: bash
 dist: bionic
-services:
-  - xvfb
 env:
   global:
     - BUILD_TOOLS=29.0.3
@@ -17,7 +15,7 @@ env:
     - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
 before_install:
   - "export DISPLAY=:99.0"
-  - sudo apt-get install libxcursor1:i386
+  - "sh -e /etc/init.d/xvfb start"
   # Instalar JDK
   - curl "https://raw.githubusercontent.com/DanySK/Gravis-CI/master/.install-jdk-travis.sh" --output ~/.install-jdk-travis.sh
   - export TARGET_JDK="${JDK}"
