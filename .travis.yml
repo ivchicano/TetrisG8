@@ -47,7 +47,7 @@ before-script:
   # Encendemos el emulador de android para los tests que lo necesiten
   - echo no | avdmanager create avd --force --name test -k "system-images;android-29;default;x86_64" -c 10M
   - |
-    EMU_PARAMS="-verbose -no-snapshot -no-window -gpu swiftshader_indirect -camera-back none -camera-front none -selinux permissive -qemu -m 2048"
+    EMU_PARAMS="-verbose -selinux permissive -qemu -m 2048"
     EMU_COMMAND="emulator"
     sudo -E sudo -u $USER -E bash -c "${ANDROID_HOME}/emulator/${EMU_COMMAND} -avd test ${AUDIO} ${EMU_PARAMS} &"
   - |
