@@ -1,5 +1,7 @@
 language: bash
 dist: bionic
+services:
+  - xvfb
 env:
   global:
     - BUILD_TOOLS=29.0.3
@@ -14,6 +16,7 @@ env:
     - TOOLS=${ANDROID_HOME}/tools
     - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
 before_install:
+  - "export DISPLAY=:99.0"
   # Instalar JDK
   - curl "https://raw.githubusercontent.com/DanySK/Gravis-CI/master/.install-jdk-travis.sh" --output ~/.install-jdk-travis.sh
   - export TARGET_JDK="${JDK}"
@@ -45,8 +48,6 @@ before-script:
   - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
   - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
   # Encendemos el emulador de android para los tests que lo necesiten
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
   - sleep 3
   - echo no | avdmanager create avd --force --name test -k "system-images;android-29;default;x86_64" -c 10M
   - |
