@@ -1,86 +1,26 @@
-language: bash
-dist: bionic
-env:
-  global:
-    - BUILD_TOOLS=29.0.3
-    - COMPILE_SDK_VERSION=29
-    - API=29
-    - ABI=x86_64
-    - ADB_INSTALL_TIMEOUT=8
-    - ANDROID_HOME=${HOME}/android-sdk
-    - ANDROID_TOOLS_URL="https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip"
-    - EMU_FLAVOR=default
-    - JDK="1.8"
-    - TOOLS=${ANDROID_HOME}/tools
-    - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
-before_install:
-  - sudo apt --no-install-suggests --no-install-recommends -yq install libxcursor-dev
-  - "export DISPLAY=:99.0"
-  - /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-  # Instalar JDK
-  - curl "https://raw.githubusercontent.com/DanySK/Gravis-CI/master/.install-jdk-travis.sh" --output ~/.install-jdk-travis.sh
-  - export TARGET_JDK="${JDK}"
-  - source ~/.install-jdk-travis.sh
-  # Instalar Android SDK
-  - wget -q "${ANDROID_TOOLS_URL}" -O android-sdk-tools.zip
-  - unzip -q android-sdk-tools.zip -d ${ANDROID_HOME}
-  - rm android-sdk-tools.zip
-  - mkdir ~/.android # eliminar warning
-  - echo 'count=0' > ~/.android/repositories.cfg # eliminar warning
-  - yes | sdkmanager --licenses >/dev/null # eliminar warning
-  - echo y | sdkmanager --no_https "platform-tools" >/dev/null
-  - echo y | sdkmanager --no_https "tools" >/dev/null
-  - echo y | sdkmanager --no_https "build-tools;$BUILD_TOOLS" >/dev/null
-  - echo y | sdkmanager --no_https "platforms;android-$COMPILE_SDK_VERSION" >/dev/null
-  - echo y | sdkmanager --no_https "emulator" >/dev/null
-  - echo y | sdkmanager --no_https "system-images;android-$API;$EMU_FLAVOR;$ABI" >/dev/null
-  # Activar KVM
-  - sudo -E apt-get -yq --no-install-suggests --no-install-recommends install bridge-utils libpulse0 libvirt-bin qemu-kvm virtinst ubuntu-vm-builder
-  - sudo adduser $USER libvirt
-  - sudo adduser $USER kvm
-  # Instalar calabash
-  - rvm install 2.7.1
-  - bundle install --jobs=3 --retry=3
+language: android
+dist: trusty
+android:
+  components:
+  - build-tools-29.0.3
+  - android-29
 before-script:
-  # Dar permisos a gradle
-  - chmod +x ./gradlew
-  # Obtener rama actual en variable de entorno BRANCH
-  - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
-  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
-  # Encendemos el emulador de android para los tests que lo necesiten
-  - sleep 3
-  - echo no | avdmanager create avd --force --name test -k "system-images;android-29;default;x86_64" -c 10M
-  - |
-    EMU_PARAMS="-verbose -no-skin -no-audio -no-window -no-boot-anim"
-    EMU_COMMAND="emulator"
-    sudo -E sudo -u $USER -E bash -c "${ANDROID_HOME}/emulator/${EMU_COMMAND} -avd test ${EMU_PARAMS} &"
-  - sleep 300
-  - adb shell settings put global window_animation_scale 0 &
-  - adb shell settings put global transition_animation_scale 0 &
-  - adb shell settings put global animator_duration_scale 0 &
-  - adb shell input keyevent 82 &
-  - ./gradlew clean assembleRelease -PdisablePreDex --continue --stacktrace
-  # Crear keystore
-  - keytool -genkey -alias androiddebugkey -keystore ~/.android/debug.keystore -storetype PKCS12 -keyalg RSA -storepass android -keysize 2048 -dname "CN=Android Debug,O=Android,C=US"
-
+# Dar permisos a gradle
+- chmod +x ./gradlew
+# Obtener rama actual en variable de entorno BRANCH
+- export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+- echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
 script:
-  # Ejecutar tests siempre
-  # Unitarios
-  - "./gradlew test"
-  # Calabash
-  - adb start-server
-  - adb devices
-  - bundle exec calabash-android resign ./app/build/outputs/apk/release/app-release-unsigned.apk
-  - cd app/src/test/java/com/example/tetrisg8/calabash
-  - bundle exec calabash-android run ../../../../../../../build/outputs/apk/release/app-release-unsigned.apk
-  - cd $HOME
-  # Si estamos en develop ejecutar sonar
-  - if [ "$BRANCH" = "develop" ]; then ./gradlew sonarqube; fi
-  # Si estamos en master desplegamos a GitHub Releases (hacemos un tag y deploy se encarga de desplegar)
-  - if [ "$BRANCH" = "master" ]; then ./gradlew sonarqube; git config --global
-    user.email "deploy@travis-ci.com"; git config --global user.name "Travis CI Deploy";
-    export GIT_TAG=1.0.$TRAVIS_BUILD_NUMBER; git tag "$GIT_TAG" -a -m "Despliegue desde Travis con build numero $TRAVIS_BUILD_NUMBER";
-    fi
+# Ejecutar tests siempre
+- "./gradlew test"
+# Si estamos en develop ejecutar sonar
+- if [ "$BRANCH" = "develop" ]; then ./gradlew sonarqube; fi
+# Si estamos en master compilamos y desplegamos a GitHub Releases (hacemos un tag y deploy se encarga de desplegar)
+- if [ "$BRANCH" = "master" ]; then ./gradlew sonarqube assembleRelease; git config --global
+  user.email "deploy@travis-ci.com"; git config --global user.name "Travis CI Deploy";
+  export GIT_TAG=1.0.$TRAVIS_BUILD_NUMBER; git tag "$GIT_TAG" -a -m "Despliegue desde Travis con build numero $TRAVIS_BUILD_NUMBER"; 
+  ls -R;
+  fi
 deploy:
   provider: releases
   api_key:
