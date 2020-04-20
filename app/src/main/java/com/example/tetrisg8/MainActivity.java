@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         tab.inicializarTablero();
         this.gameView = new GameView(this, tab);
         this.fichaView = new FichaView(this);
-
         this.mensajeLinea = new MensajeLinea((TextView) findViewById(R.id.lineMessage));
 
         LinearLayout gameLayout = (LinearLayout) findViewById(R.id.gameView);

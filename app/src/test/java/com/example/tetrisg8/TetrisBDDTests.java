@@ -81,7 +81,7 @@ public class TetrisBDDTests {
     public void iClickInTheChangeNextPieceButton() {
         piezaSiguienteAntigua = funcionamientoJuego.generarPiezaSiguiente();
         Pieza p = funcionamientoJuego.generarPiezaSiguiente();
-        funcionamientoJuego.setPiezaSiguiente(p);
+        funcionamientoJuego.setPiezaSiguiente(p) ;
     }
 
     @Then("^The user have to see how the next piece changes$")
@@ -111,4 +111,85 @@ public class TetrisBDDTests {
         assertEquals(980, funcionamientoJuego.getPuntuacion());
     }
     //endregion
+
+
+        //Smoke test 1
+
+    @Given("^the tetris in pause$")
+    public void the_tetris_in_pause(){
+        funcionamientoJuego = new FuncionamientoJuego(gameView, fichaView, tablero, "test", null);
+    }
+
+    @When("^the game is starting$")
+    public void the_game_is_starting() throws Throwable{
+        funcionamientoJuego.setMainActivity(mainActivity);
+        mainActivity.setStart(funcionamientoJuego);
+    }
+
+    @Then("^the thread is created$")
+    public void  the_thread_is_created() {
+        assertNotNull(funcionamientoJuego.getMainActivity());
+    }
+
+        //end smoke test 1
+        //Smoke test 2
+        @When("^the game is paused$")
+        public void the_game_is_paused() throws Throwable{
+            mainActivity.onPause();
+        }
+        @Then("^the music is disable$")
+        public void  the_music_is_disable(){
+            assertFalse(funcionamientoJuego.isMusicEnable());
+        }
+        //end smoke test 2
+        //Smoke test 3
+        @When("^the game is stop$")
+        public void the_game_is_stop() throws Throwable{
+             mainActivity.onDestroy();
+        }
+
+        //end smoke test 3
+        //Smoke test 4
+
+    @Given("^the piece$")
+    public void the_piece() throws Throwable{
+    }
+
+    @When("^the piece is created$")
+    public void the_piece_is_created() throws Throwable{
+        nuevaPieza = new Pieza(5);
+    }
+
+    @Then("^the piece is created correctly$")
+    public void the_piece_is_created_correctly() throws Throwable {
+
+        assertEquals(5,nuevaPieza.getCuadrados()[0]);
+        assertEquals(1,nuevaPieza.getCuadrados()[1]);
+        assertEquals(4,nuevaPieza.getCuadrados()[2]);
+        assertEquals(2,nuevaPieza.getCuadrados()[3]);
+        assertEquals(5,nuevaPieza.getCuadrados()[4]);
+        assertEquals(2,nuevaPieza.getCuadrados()[5]);
+        assertEquals(4,nuevaPieza.getCuadrados()[6]);
+        assertEquals(3,nuevaPieza.getCuadrados()[7]);
+    }
+        //end smoke test 4
+        //Smoke test 5
+        @Given("^the_game$")
+        public void the_game() throws Throwable{
+            funcionamientoJuego = new FuncionamientoJuego(gameView, fichaView, tablero, "test", null);
+            funcionamientoJuego.setMainActivity(mainActivity);
+            mainActivity.setStart(funcionamientoJuego);
+        }
+
+    @When("^the game is init$")
+    public void the_game_is_init() throws Throwable{
+        funcionamientoJuego.inicializarPartida();
+    }
+
+    @Then("^the game is established with parameters corrects$")
+    public void the_game_is_established_with_parameters_corrects() throws Throwable {
+        assertEquals(0,funcionamientoJuego.getPuntuacion());
+        assertEquals(0,funcionamientoJuego.getTiempoTranscurrido());
+    }
+        //end smoke test 5
 }

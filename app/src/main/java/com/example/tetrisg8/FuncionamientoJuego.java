@@ -270,4 +270,7 @@ public class FuncionamientoJuego {
     public void losePointsWhenClickOnNextPiece(){
         this.setPuntuacion(this.getPuntuacion()-20);
     }
+    public  Timer  getTimer(){
+        return this.timer;
+    }
 }
