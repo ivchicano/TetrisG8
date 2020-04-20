@@ -6,11 +6,11 @@ Feature: Smoke tests
    		When the game is starting
    		Then the thread is created
    Scenario: Pause the game
-        Given the player is playing the game
+	   Given The player is playing the game
         When the game is paused
         Then the music is disable
    Scenario: Close the game
-		Given the player is playing the game
+	   Given The player is playing the game
 		When the game is stop
 		Then the music is disable
    Scenario: Create piece
