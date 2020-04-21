@@ -108,3 +108,8 @@ task gitCompletePush {
     tasks.findByName("gitCommit").mustRunAfter "gitAdd"
     tasks.findByName("gitPush").mustRunAfter "gitCommit"
 }
+test {
+	if (project.hasProperty('excludeTests')) {
+		exclude project.property('excludeTests')
+	}
+}
