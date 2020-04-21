@@ -17,10 +17,10 @@ Feature: Smoke tests
 		Given the piece
 		When the piece is created
 		Then the piece is created correctly
-   Scenario: Init correctly game
+   Scenario: Init correctly table
 		Given the game
-		When the game is init
-		Then the game is established with parameters corrects
+		When the table is created
+		Then the table is created correctly
 
 
 

@@ -12,6 +12,7 @@ public class TetrisBDDTests {
     private GameView gameView = mock(GameView.class);
     private FichaView fichaView = mock(FichaView.class);
     private Tablero tablero = mock(Tablero.class);
+    private Tablero table = new Tablero();
     private FuncionamientoJuego funcionamientoJuego;
     private MainActivity mainActivity = mock(MainActivity.class);
     private TakePhoto takePhoto = mock(TakePhoto.class);
@@ -176,15 +177,18 @@ public class TetrisBDDTests {
         assertEquals(3, nuevaPieza.getCuadrados()[7]);
     }
 
-    @When("^the game is init$")
-    public void the_game_is_init() throws Throwable {
-        funcionamientoJuego.inicializarPartida();
+    @When("^the table is created$")
+    public void the_table_is_created() throws Throwable{
+        table.inicializarTablero();
     }
 
-    @Then("^the game is established with parameters corrects$")
-    public void the_game_is_established_with_parameters_corrects() throws Throwable {
-        assertEquals(0, funcionamientoJuego.getPuntuacion());
-        assertEquals(0, funcionamientoJuego.getTiempoTranscurrido());
+    @Then("^the table is created correctly$")
+    public void the_table_is_created_correctly() throws Throwable {
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 10; j++) {
+                assertEquals(0,table.getTablero()[i][j]);
+            }
+        }
     }
 
     @Given("^the game$")
