@@ -23,4 +23,3 @@ Feature: Smoke tests
 		Then the table is created correctly
 
 
-

@@ -114,7 +114,7 @@ public class TetrisBDDTests {
     }
     //endregion
 
-
+/*
     //Smoke test 1
 
     @Given("^the tetris in pause$")
@@ -196,5 +196,5 @@ public class TetrisBDDTests {
         funcionamientoJuego = new FuncionamientoJuego(gameView, fichaView, tablero, "test", null);
         funcionamientoJuego.setMainActivity(mainActivity);
         mainActivity.setStart(funcionamientoJuego);
-    }
+    }*/
 }
