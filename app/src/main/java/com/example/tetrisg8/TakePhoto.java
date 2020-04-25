@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
 
+
 public class TakePhoto extends AppCompatActivity {
     static Activity ventanaFoto;
     private FuncionamientoJuego start;
