@@ -36,19 +36,20 @@ GEM
     multi_json (1.14.1)
     multi_test (0.1.2)
     retriable (2.0.2)
-    rubyzip (1.2.1)
+    rubyzip (1.3.0)
     slowhandcuke (0.0.3)
       cucumber
     thor (0.20.3)
 
 PLATFORMS
+  ruby
   x64-mingw32
   x86-mingw32
 
 DEPENDENCIES
   calabash-android (= 0.9.5)
   cucumber
-  rubyzip (= 1.2.1)
+  rubyzip (= 1.3.0)
 
 BUNDLED WITH
    2.1.4
