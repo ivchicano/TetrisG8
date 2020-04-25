@@ -54,6 +54,8 @@ public class TakePhoto extends AppCompatActivity {
         goToMain.putExtra("tiempo", tiempo);
         goToMain.putExtra("foto", imagen);
         startActivity(goToMain);
+        finish();
+
     }
 
     @Override

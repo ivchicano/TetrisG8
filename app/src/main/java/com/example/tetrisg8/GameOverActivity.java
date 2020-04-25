@@ -2,6 +2,7 @@ package com.example.tetrisg8;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -49,8 +50,6 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
         textViewPuntuacion.setText(String.valueOf(puntuacion));
         textViewTiempo = (TextView) findViewById(R.id.time);
         textViewTiempo.setText(String.valueOf( df.format(tiempo)));
-        Button btnMainScreen=this.findViewById(R.id.botPantallaPrincipal);
-        btnMainScreen.setOnClickListener(this);
         Button botonSalir = (Button) this.findViewById(R.id.botSalir);
         botonSalir.setOnClickListener(this);
         Button botonJugar = (Button) this.findViewById(R.id.botJugar);
@@ -141,9 +140,6 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
                 MainActivity.ventanaTablero.finish();
                 //TakePhoto.ventanaFoto.finish();
                 finish();
-            }else if (v.getId()==R.id.botPantallaPrincipal){
-                Intent intent= new Intent(this,StartGame.class);
-                startActivity(intent);
             }
         }
 

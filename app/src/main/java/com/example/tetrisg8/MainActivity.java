@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         tab.inicializarTablero();
         this.gameView = new GameView(this, tab);
         this.fichaView = new FichaView(this);
-
         this.mensajeLinea = new MensajeLinea((TextView) findViewById(R.id.lineMessage));
 
         LinearLayout gameLayout = (LinearLayout) findViewById(R.id.gameView);
@@ -69,13 +68,14 @@ public class MainActivity extends AppCompatActivity {
             gameView.invalidate();
     }
     public void changeNextPiece(View view){
-        System.out.println("Dentro prueba");
         Pieza p  = start.generarPiezaSiguiente();
         start.setPiezaSiguiente(p);
         tab.setPiezaSiguiente(p);
         fichaView.setPiezaSiguiente(p);
         gameView.invalidate();
+        start.losePointsWhenClickOnNextPiece();
     }
+
 
     public void setStart(FuncionamientoJuego start) {
         this.start = start;

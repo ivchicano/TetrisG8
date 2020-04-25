@@ -1,40 +1,25 @@
 package com.example.tetrisg8;
 
-import android.content.SharedPreferences;
-
-import androidx.preference.PreferenceManager;
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
 
 import static org.junit.Assert.*;
-
 import static org.mockito.Mockito.mock;
 
 
 public class TetrisBDDTests {
-
     private GameView gameView = mock(GameView.class);
     private FichaView fichaView = mock(FichaView.class);
     private Tablero tablero = mock(Tablero.class);
+    private Tablero table = new Tablero();
     private FuncionamientoJuego funcionamientoJuego;
     private MainActivity mainActivity = mock(MainActivity.class);
     private TakePhoto takePhoto = mock(TakePhoto.class);
     private GameOverActivity gameOverActivity = mock(GameOverActivity.class);
-    Pieza piezaSiguienteAntigua;
-    Pieza nuevaPieza;
+    private Pieza piezaSiguienteAntigua;
+    private Pieza nuevaPieza;
 
-    //region main screen
-    @When("^I click main screen button$")
-    public void iClickMainScreenButton() {
-    }
-
-    @Then("^I will be redirect to the main screen$")
-    public void iWillBeRedirectToTheMainScreen() {
-        assertEquals(1, 2);
-    }
-    //endregion
 
     //region music
     @When("^I choose play background music option$")
@@ -105,6 +90,27 @@ public class TetrisBDDTests {
     public void theUserHaveToSeeHowTheNextPieceChanges() {
         Pieza p = funcionamientoJuego.getPiezaSiguiente();
         assertNotEquals(piezaSiguienteAntigua, p);
+    }
+    //endregion
+
+    //region lose points
+    @Given("^I want to the user loses 20 points$")
+    public void iWantToTheUserLosesPoints() {
+        funcionamientoJuego = new FuncionamientoJuego(gameView, fichaView, tablero, "test", null);
+        funcionamientoJuego.setMainActivity(mainActivity);
+        assertEquals(0, funcionamientoJuego.getPuntuacion());
+        funcionamientoJuego.setPuntuacion(1000);
+    }
+
+    @When("^I click on the change next piece button$")
+    public void iClickOnTheChangeNextPieceButton() {
+        assertEquals(1000, funcionamientoJuego.getPuntuacion());
+        funcionamientoJuego.losePointsWhenClickOnNextPiece();
+    }
+
+    @Then("^The points has to decrease 20 units$")
+    public void thePointsHasToDecreaseUnits() {
+        assertEquals(980, funcionamientoJuego.getPuntuacion());
     }
     //endregion
 
